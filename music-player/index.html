@@ -2,43 +2,61 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jarvis Music Player</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      background: #111;
-      color: #fff;
-      font-family: sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
       height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000; /* مشکی کامل برای نمای بهتر شفافیت */
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
     }
-    h1 {
-      margin-bottom: 30px;
-    }
-    audio {
-      width: 80%;
-      outline: none;
-    }
+
     .player-container {
-      border: 2px solid #00f0ff;
-      padding: 20px;
+      background: rgba(255, 255, 255, 0.05); /* شفافیت کامل */
+      backdrop-filter: blur(10px); /* افکت بلور پشت پلیر */
+      padding: 30px;
       border-radius: 20px;
-      background: rgba(0, 0, 0, 0.6);
-      box-shadow: 0 0 20px #00f0ff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+      transition: all 0.3s ease;
+    }
+
+    .player-container:hover {
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 1.6rem;
+      color: #00f0ff;
+    }
+
+    audio {
+      width: 100%;
+      outline: none;
     }
   </style>
 </head>
 <body>
-  <h1>Jarvis Music Player</h1>
   <div class="player-container">
+    <h1>Jarvis Music Player</h1>
     <audio controls>
       <source src="7.mp3" type="audio/mpeg" />
       Your browser does not support the audio element.
     </audio>
   </div>
 </body>
-</html>add: basic music player UI
-fix: update audio source filename
+</html>
