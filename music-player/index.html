@@ -10,53 +10,90 @@
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #000; /* مشکی کامل برای نمای بهتر شفافیت */
-      font-family: 'Segoe UI', sans-serif;
+      background: #000;
+      font-family: "Segoe UI", sans-serif;
       color: #fff;
     }
-
     .player-container {
-      background: rgba(255, 255, 255, 0.05); /* شفافیت کامل */
-      backdrop-filter: blur(10px); /* افکت بلور پشت پلیر */
+      border: 2px solid #00f0ff;
       padding: 30px;
       border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+      background: rgba(0, 0, 0, 0.6);
+      box-shadow: 0 0 30px #00f0ff;
+      backdrop-filter: blur(10px);
       text-align: center;
-      width: 90%;
-      max-width: 400px;
-      transition: all 0.3s ease;
     }
-
-    .player-container:hover {
-      box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
-    }
-
     h1 {
       margin-bottom: 20px;
       font-size: 1.6rem;
       color: #00f0ff;
     }
-
     audio {
       width: 100%;
       outline: none;
+    }
+    .bars {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      margin-top: 20px;
+      height: 30px;
+    }
+    .bar {
+      width: 5px;
+      background: #00f0ff;
+      animation: pulse 1s infinite ease-in-out;
+    }
+    .bar:nth-child(1) { animation-delay: 0s; }
+    .bar:nth-child(2) { animation-delay: 0.1s; }
+    .bar:nth-child(3) { animation-delay: 0.2s; }
+    .bar:nth-child(4) { animation-delay: 0.3s; }
+    .bar:nth-child(5) { animation-delay: 0.4s; }
+
+    @keyframes pulse {
+      0%, 100% { height: 10px; }
+      50% { height: 30px; }
+    }
+
+    .bars.paused .bar {
+      animation-play-state: paused;
     }
   </style>
 </head>
 <body>
   <div class="player-container">
     <h1>Jarvis Music Player</h1>
-    <audio controls>
+    <audio id="audio" controls>
       <source src="7.mp3" type="audio/mpeg" />
       Your browser does not support the audio element.
     </audio>
+    <div id="bars" class="bars paused">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
   </div>
+
+  <script>
+    const audio = document.getElementById('audio');
+    const bars = document.getElementById('bars');
+
+    audio.onplay = () => {
+      bars.classList.remove('paused');
+    };
+    audio.onpause = () => {
+      bars.classList.add('paused');
+    };
+    audio.onended = () => {
+      bars.classList.add('paused');
+    };
+  </script>
 </body>
 </html>
